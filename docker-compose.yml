@@ -1,13 +1,17 @@
 services:
   backend:
-    build: ./backend
+    build:
+      context: .
+      dockerfile: backend/Dockerfile
     ports:
       - "8000:8000"
     volumes:
-      - ./backend:/code
+      - .:/code
     working_dir: /code
+    env_file:
+      - .env
     environment:
-      - DATABASE_URL=postgresql://user:password@db:5432/photodb
+      - PYTHONPATH=backend
     depends_on:
       - db
 
@@ -15,10 +19,8 @@ services:
     image: postgres:13
     volumes:
       - postgres_data:/var/lib/postgresql/data/
-    environment:
-      - POSTGRES_USER=user
-      - POSTGRES_PASSWORD=password
-      - POSTGRES_DB=photodb
+    env_file:
+      - .env
 
 volumes:
   postgres_data:
