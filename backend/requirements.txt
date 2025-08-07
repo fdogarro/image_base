@@ -3,5 +3,11 @@ uvicorn[standard]
 pydantic[email]
 sqlmodel
 alembic
-asyncpg
+
 python-dotenv
+passlib
+python-jose
+pydantic-settings
+python-multipart
+aiosqlite
+psycopg2-binary
